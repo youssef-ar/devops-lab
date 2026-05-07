@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Sonar
+.scannerwork/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets (never commit)
+*.env
+.env.*
+!.env.example
+
+# Terraform (lock file IS committed for provider reproducibility)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+!*.tfvars.example
+
+# Kubeconfigs written by the kind provider in the working dir
+infra/terraform/*-config
+
+# Report (compiled output, planning doc, captured screenshots are local-only)
+report/*.pdf
+report/SCREENSHOTS.md
+report/screenshots/
+*.typ
