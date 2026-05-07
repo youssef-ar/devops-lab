@@ -140,7 +140,7 @@ def delete_todo(todo_id: int):
 def reset_todos():
     REQUEST_COUNTER.labels(endpoint="/todos").inc()
     storage.clear()
-    return {"message": "All todos cleared"}
+    return {"message": "All todos are cleared"}
 
 
 @router.get("/healthz")
