@@ -11,7 +11,7 @@
       "title": "Pods Up",
       "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
       "targets": [
-        {"expr": "sum(up{namespace=\"demo\",job=\"devops-cicd-lab\"})", "refId": "A"}
+        {"expr": "sum(up{namespace=\"demo\",job=\"devops-lab\"})", "refId": "A"}
       ],
       "fieldConfig": {
         "defaults": {
@@ -37,7 +37,7 @@
       "title": "Pod Restarts (total)",
       "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
       "targets": [
-        {"expr": "sum(kube_pod_container_status_restarts_total{namespace=\"demo\",pod=~\"devops-cicd-lab-.*\"})", "refId": "A"}
+        {"expr": "sum(kube_pod_container_status_restarts_total{namespace=\"demo\",pod=~\"devops-lab-.*\"})", "refId": "A"}
       ],
       "fieldConfig": {
         "defaults": {
@@ -64,8 +64,8 @@
       "title": "Available / Desired Replicas",
       "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
       "targets": [
-        {"expr": "kube_deployment_status_replicas_available{namespace=\"demo\",deployment=\"devops-cicd-lab\"}", "legendFormat": "available", "refId": "A"},
-        {"expr": "kube_deployment_spec_replicas{namespace=\"demo\",deployment=\"devops-cicd-lab\"}", "legendFormat": "desired", "refId": "B"}
+        {"expr": "kube_deployment_status_replicas_available{namespace=\"demo\",deployment=\"devops-lab\"}", "legendFormat": "available", "refId": "A"},
+        {"expr": "kube_deployment_spec_replicas{namespace=\"demo\",deployment=\"devops-lab\"}", "legendFormat": "desired", "refId": "B"}
       ],
       "fieldConfig": {"defaults": {"unit": "short"}},
       "options": {
@@ -95,7 +95,7 @@
       "title": "Pod CPU",
       "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
       "targets": [
-        {"expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"demo\",pod=~\"devops-cicd-lab-.*\",container=\"app\"}[2m]))", "legendFormat": "{{pod}}", "refId": "A"}
+        {"expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"demo\",pod=~\"devops-lab-.*\",container=\"app\"}[2m]))", "legendFormat": "{{pod}}", "refId": "A"}
       ],
       "fieldConfig": {"defaults": {"unit": "percentunit"}}
     },
@@ -105,7 +105,7 @@
       "title": "Pod Memory (working set)",
       "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
       "targets": [
-        {"expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"demo\",pod=~\"devops-cicd-lab-.*\",container=\"app\"})", "legendFormat": "{{pod}}", "refId": "A"}
+        {"expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"demo\",pod=~\"devops-lab-.*\",container=\"app\"})", "legendFormat": "{{pod}}", "refId": "A"}
       ],
       "fieldConfig": {"defaults": {"unit": "bytes"}}
     },
@@ -115,7 +115,7 @@
       "title": "Network Inbound (bytes/sec)",
       "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
       "targets": [
-        {"expr": "sum by (pod) (rate(container_network_receive_bytes_total{namespace=\"demo\",pod=~\"devops-cicd-lab-.*\"}[1m]))", "legendFormat": "{{pod}}", "refId": "A"}
+        {"expr": "sum by (pod) (rate(container_network_receive_bytes_total{namespace=\"demo\",pod=~\"devops-lab-.*\"}[1m]))", "legendFormat": "{{pod}}", "refId": "A"}
       ],
       "fieldConfig": {"defaults": {"unit": "Bps"}}
     },
@@ -125,7 +125,7 @@
       "title": "Network Outbound (bytes/sec)",
       "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
       "targets": [
-        {"expr": "sum by (pod) (rate(container_network_transmit_bytes_total{namespace=\"demo\",pod=~\"devops-cicd-lab-.*\"}[1m]))", "legendFormat": "{{pod}}", "refId": "A"}
+        {"expr": "sum by (pod) (rate(container_network_transmit_bytes_total{namespace=\"demo\",pod=~\"devops-lab-.*\"}[1m]))", "legendFormat": "{{pod}}", "refId": "A"}
       ],
       "fieldConfig": {"defaults": {"unit": "Bps"}}
     },
@@ -142,12 +142,12 @@
   ],
   "refresh": "30s",
   "schemaVersion": 39,
-  "tags": ["devops-cicd-lab"],
+  "tags": ["devops-lab"],
   "templating": {"list": []},
   "time": {"from": "now-30m", "to": "now"},
   "timepicker": {},
   "timezone": "browser",
-  "title": "devops-cicd-lab",
-  "uid": "devops-cicd-lab",
+  "title": "devops-lab",
+  "uid": "devops-lab",
   "version": 2
 }

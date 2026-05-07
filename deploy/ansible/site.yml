@@ -1,4 +1,4 @@
-- name: Deploy devops-cicd-lab to Kubernetes
+- name: Deploy devops-lab to Kubernetes
   hosts: localhost
   connection: local
   gather_facts: false
@@ -8,15 +8,15 @@
 
   vars:
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
-    app_name: devops-cicd-lab
+    app_name: devops-lab
     k8s_namespace: demo
-    image: youssefar22/devops-cicd-lab
+    image: youssefar22/devops-lab
     image_tag: "{{ lookup('env', 'IMAGE_TAG') | default('latest', true) }}"
     container_port: 5000
     replicas: 2
     ingress_host: app.127-0-0-1.nip.io
     kubeconfig_path: "{{ lookup('env', 'KUBECONFIG') | default(lookup('env', 'HOME') ~ '/.kube/config', true) }}"
-    kube_context: "{{ lookup('env', 'KUBE_CONTEXT') | default('kind-devops-cicd-lab', true) }}"
+    kube_context: "{{ lookup('env', 'KUBE_CONTEXT') | default('kind-devops-lab', true) }}"
 
   tasks:
     - name: Apply Deployment
@@ -63,7 +63,7 @@
             labels:
               grafana_dashboard: "1"
           data:
-            devops-cicd-lab.json: "{{ lookup('file', 'files/grafana-dashboard.json') }}"
+            devops-lab.json: "{{ lookup('file', 'files/grafana-dashboard.json') }}"
 
     - name: Apply AlertManager SMTP credential Secret
       kubernetes.core.k8s:
@@ -138,14 +138,14 @@
               - name: "{{ app_name }}.rules"
                 rules:
                   - alert: AppDown
-                    expr: 'absent(up{job="devops-cicd-lab",namespace="demo"}) == 1 or sum(up{job="devops-cicd-lab",namespace="demo"}) == 0'
+                    expr: 'absent(up{job="devops-lab",namespace="demo"}) == 1 or sum(up{job="devops-lab",namespace="demo"}) == 0'
                     for: 2m
                     labels:
                       severity: critical
                       app: "{{ app_name }}"
                     annotations:
-                      summary: "devops-cicd-lab is DOWN"
-                      description: "No instances of devops-cicd-lab are reporting up=1 for more than 2 minutes."
+                      summary: "devops-lab is DOWN"
+                      description: "No instances of devops-lab are reporting up=1 for more than 2 minutes."
 
     - name: Show what was deployed
       kubernetes.core.k8s_info:

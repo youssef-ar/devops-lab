@@ -3,7 +3,7 @@ services:
     build:
       context: ./ci
       dockerfile: jenkins.Dockerfile
-    image: devops-cicd-lab/jenkins:latest
+    image: devops-lab/jenkins:latest
     container_name: jenkins
     restart: unless-stopped
     ports:

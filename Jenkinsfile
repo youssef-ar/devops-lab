@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         UV_CACHE_DIR = "${WORKSPACE}/.uv-cache"
-        IMAGE_NAME   = 'youssefar22/devops-cicd-lab'
+        IMAGE_NAME   = 'youssefar22/devops-lab'
         IMAGE_TAG    = "${env.BUILD_NUMBER}"
         IMAGE_REF    = "${IMAGE_NAME}:${IMAGE_TAG}"
     }
@@ -66,7 +66,7 @@ pipeline {
                 sh '''
                     docker build \
                       --label org.opencontainers.image.revision=$(cat .git-sha) \
-                      --label org.opencontainers.image.source=https://github.com/youssefar22/devops-cicd-lab \
+                      --label org.opencontainers.image.source=https://github.com/youssefar22/devops-lab \
                       -t $IMAGE_REF \
                       -t $IMAGE_NAME:latest \
                       .
@@ -116,7 +116,7 @@ pipeline {
 
         stage('Infrastructure (Terraform)') {
             environment {
-                TF_VAR_k8s_endpoint_override = 'https://devops-cicd-lab-control-plane:6443'
+                TF_VAR_k8s_endpoint_override = 'https://devops-lab-control-plane:6443'
             }
             steps {
                 dir('infra/terraform') {
@@ -160,7 +160,7 @@ pipeline {
                     URL="http://app.127-0-0-1.nip.io/"
                     for i in $(seq 1 30); do
                         code=$(curl -s -o /tmp/smoke-body -w '%{http_code}' \
-                            --connect-to app.127-0-0-1.nip.io:80:devops-cicd-lab-control-plane:80 \
+                            --connect-to app.127-0-0-1.nip.io:80:devops-lab-control-plane:80 \
                             "$URL" || true)
                         if [ "$code" = "200" ]; then
                             echo "Smoke test OK (HTTP $code) against $URL"
